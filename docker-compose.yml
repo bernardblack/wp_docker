@@ -55,9 +55,24 @@ services:
     networks:
       - wp_net
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.0.0
+    container_name: phpmyadmin-5.0.0
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql
+    volumes:
+      - phpmyadmin:/usr/src/phpmyadmin
+    depends_on:
+      - mysql
+    networks:
+      - wp_net
+
 volumes:
   www-html:
   dbfile:
+  phpmyadmin:
 
 networks:
   wp_net:
