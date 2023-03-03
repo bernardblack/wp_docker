@@ -36,8 +36,6 @@ services:
     depends_on:
       - wordpress
     restart: unless-stopped
-    ports:
-      - "80:80"
     volumes:
       - ./varnish:/etc/varnish
     networks:
@@ -48,8 +46,11 @@ services:
     depends_on:
       - wordpress
     container_name: nginx-1.23.3-alpine
+    depends_on:
+      - mysql
     ports:
       - 443:443
+      - 80:80
     restart: unless-stopped
     volumes:
       - ./wordpress:/var/www/html
@@ -80,3 +81,4 @@ volumes:
 networks:
   wp_net:
     driver: bridge
+
